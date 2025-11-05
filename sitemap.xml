@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>Alex/index.html</loc>
-    <lastmod>2025-11-04T23:49:26.950Z</lastmod>
-  </url>
-  <url>
     <loc>Alex/posts/MLB-Pitch-Clock/index.html</loc>
     <lastmod>2025-11-05T00:16:18.891Z</lastmod>
+  </url>
+  <url>
+    <loc>Alex/about.html</loc>
+    <lastmod>2025-11-05T00:37:12.170Z</lastmod>
+  </url>
+  <url>
+    <loc>Alex/index.html</loc>
+    <lastmod>2025-11-04T23:49:26.950Z</lastmod>
   </url>
 </urlset>
