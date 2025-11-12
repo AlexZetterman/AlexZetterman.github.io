@@ -362,8 +362,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>The introduction of the MLB pitch clock was perhaps the most drastic and immediate rule change baseball had seen in decades. The rule change happened after the 2022 baseball season so the first season that had the pitch clock was 2023. The clock fundamentally altered the game’s famous slow cadence. Players, long accustomed to leisurely pacing and endless adjustments on the mound, were now forced into constant motion, transforming a sport once defined by patience into one defined by urgency. This single device, ticking down the seconds, did what years of debate could not.</p>
-<p>The real question is did the MLB pitch clock help out the pitcher or batter more?</p>
+<p>The introduction of the MLB pitch clock was perhaps the most drastic and immediate rule change baseball had seen in decades. The rule change happened after the 2022 baseball season so the first season that had the pitch clock was 2023. The clock fundamentally altered the game’s famous slow cadence. Players, long accustomed to leisurely pacing and endless adjustments on the mound, were now forced into constant motion, transforming a sport once defined by patience into one defined by urgency. This single device, ticking down the seconds, did what years of debate could not. The overall goal, make the game sped up so fans pay more attention. But, someone has to have success off the rule change. Has the batter or pitcher been affected by the pitch clock chnage more?</p>
+<p>To determine how overall offensive efficiency has shifted, I looked at the league-wide batting splits over the last 6 seasons, to know if there was a batter advantage after the rule changed.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -381,7 +381,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"data/MLB.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 155 Columns: 30
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (1): RBI
+dbl (29): Year, Tms, #Bat, BatAge, R/G, G, PA, AB, R, H, 1B, 2B, 3B, HR, SB,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 155 × 30
+    Year   Tms `#Bat` BatAge `R/G`     G    PA    AB     R     H  `1B`  `2B`
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  2025    30    763   27.9  4.45  4860  37.6  33.7  4.45  8.26  5.38  1.59
+ 2  2024    30    741   27.9  4.39  4858  37.6  33.7  4.39  8.2   5.34  1.6 
+ 3  2023    30    765   28    4.62  4860  37.9  33.8  4.62  8.4   5.35  1.69
+ 4  2022    30    790   28.2  4.28  4860  37.5  33.6  4.28  8.16  5.33  1.63
+ 5  2021    30   1373   28.4  4.53  4858  37.4  33.3  4.53  8.13  5.15  1.62
+ 6  2020    30    618   28    4.65  1796  37.0  32.9  4.65  8.04  5.06  1.57
+ 7  2019    30   1287   27.9  4.83  4858  38.4  34.3  4.83  8.65  5.34  1.76
+ 8  2018    30   1271   28.1  4.45  4862  38.1  34.0  4.45  8.44  5.42  1.7 
+ 9  2017    30   1229   28.3  4.65  4860  38.1  34.1  4.65  8.69  5.54  1.73
+10  2016    30   1247   28.4  4.48  4856  38.0  34.1  4.48  8.71  5.67  1.7 
+# ℹ 145 more rows
+# ℹ 18 more variables: `3B` &lt;dbl&gt;, HR &lt;dbl&gt;, RBI &lt;chr&gt;, SB &lt;dbl&gt;, CS &lt;dbl&gt;,
+#   BB &lt;dbl&gt;, SO &lt;dbl&gt;, BA &lt;dbl&gt;, OBP &lt;dbl&gt;, SLG &lt;dbl&gt;, OPS &lt;dbl&gt;, TB &lt;dbl&gt;,
+#   GDP &lt;dbl&gt;, HBP &lt;dbl&gt;, SH &lt;dbl&gt;, SF &lt;dbl&gt;, IBB &lt;dbl&gt;, BIP &lt;dbl&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>MLB <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MLB.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 155 Columns: 30
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (1): RBI
+dbl (29): Year, Tms, #Bat, BatAge, R/G, G, PA, AB, R, H, 1B, 2B, 3B, HR, SB,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter and select data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>obp <span class="ot">&lt;-</span> MLB <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> <span class="dv">2020</span> <span class="sc">&amp;</span> Year <span class="sc">&lt;=</span> <span class="dv">2025</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, OBP)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>slg <span class="ot">&lt;-</span> MLB <span class="sc">|&gt;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> <span class="dv">2020</span> <span class="sc">&amp;</span> Year <span class="sc">&lt;=</span> <span class="dv">2025</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, SLG)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ops <span class="ot">&lt;-</span> MLB <span class="sc">|&gt;</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> <span class="dv">2020</span> <span class="sc">&amp;</span> Year <span class="sc">&lt;=</span> <span class="dv">2025</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, OPS)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine all three stats into one dataset</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>MLB_stats <span class="ot">&lt;-</span> MLB <span class="sc">|&gt;</span> </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> <span class="dv">2020</span> <span class="sc">&amp;</span> Year <span class="sc">&lt;=</span> <span class="dv">2025</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, OBP, SLG, OPS) <span class="sc">|&gt;</span> </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(OBP, SLG, OPS),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Statistic"</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Create grouped bar chart</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(MLB_stats, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Year), <span class="at">y =</span> Value, <span class="at">fill =</span> Statistic)) <span class="sc">+</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey"</span>, <span class="st">"black"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">0.8</span>, <span class="fl">0.1</span>),  </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.8</span>)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"MLB Offensive Metrics by Year (2020–2025)"</span>,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span> <span class="st">"bfuebeu"</span>,</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Value"</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Statistic"</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<pre><code></code></pre>
+<pre class="{r}#| include: false}"><code>ggsave("image.png")
+</code></pre>
 
 
 
