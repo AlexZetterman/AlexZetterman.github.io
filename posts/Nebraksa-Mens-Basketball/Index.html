@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alex Zetterman">
-<meta name="dcterms.date" content="2025-11-25">
+<meta name="dcterms.date" content="2025-12-09">
 
-<title>Mens Nebraska Basketball – Alex’s Sports Blog</title>
+<title>Nebraska’s 2023-2024 team compared to the last decade – Alex's Sports Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -322,10 +322,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Mens Nebraska Basketball</h1>
+      <h1 class="title">Nebraska’s 2023-2024 team compared to the last decade</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">MLB</div>
-                <div class="quarto-category">Mens NCAAB</div>
+                <div class="quarto-category">Basketball</div>
+                <div class="quarto-category">NCAAB</div>
               </div>
                   </div>
   </div>
@@ -343,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 25, 2025</p>
+        <p class="date">December 9, 2025</p>
       </div>
     </div>
     
@@ -363,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>glimpse(NCAA)</p>
+<p>After years of near-misses and rebuilding, the 2023-2024 Nebraska Men’s Basketball team finally broke through, securing a coveted spot in the NCAA March Madness tournament. But where does this squad truly rank among its recent seasons? This analysis dives deep into the metrics of the last ten seasons of Nebraska Basketball before that season (so it will be 13 seasons total). I compared key performance indicators including win/loss ratio, Strength of Schedule , Points Per Game, and Opponent Points Per Game to determine the true quality of the 2023-2024 team. Through a combination of visualizations, I aim to deliver a clear, data-driven answer to the question: How good was the 2023-2024 team compared to the last decade?</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -383,10 +383,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"data/NCAA.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"data/NCAA.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 16 Columns: 19
+<pre><code>Rows: 13 Columns: 19
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (4): Season, Conference, NCAA_Tournament, Coach
@@ -397,7 +398,7 @@ lgl  (1): AP_Final
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16 × 19
+<pre><code># A tibble: 13 × 19
       Rk Season  Conference Overall_W Overall_L Overall_WinPct Conf_W Conf_L
    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
  1     1 2025-26 Big Ten            8         0          1         NA     NA
@@ -413,19 +414,16 @@ lgl  (1): AP_Final
 11    11 2015-16 Big Ten           16        18          0.471      6     12
 12    12 2014-15 Big Ten           13        18          0.419      5     13
 13    13 2013-14 Big Ten           19        13          0.594     11      7
-14    14 2012-13 Big Ten           15        18          0.455      5     13
-15    15 2011-12 Big Ten           12        18          0.4        4     14
-16    16 2010-11 Big 12            19        13          0.594      7      9
 # ℹ 11 more variables: Conf_WinPct &lt;dbl&gt;, SRS &lt;dbl&gt;, SOS &lt;dbl&gt;,
 #   Points_For &lt;dbl&gt;, Points_Against &lt;dbl&gt;, AP_Pre &lt;dbl&gt;, AP_High &lt;dbl&gt;,
 #   AP_Final &lt;lgl&gt;, NCAA_Tournament &lt;chr&gt;, Seed &lt;dbl&gt;, Coach &lt;chr&gt;</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>NCAA <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/NCAA.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Nebraska_Season <span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/NCAA.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 16 Columns: 19
+<pre><code>Rows: 13 Columns: 19
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (4): Season, Conference, NCAA_Tournament, Coach
@@ -437,32 +435,56 @@ lgl  (1): AP_Final
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(NCAA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Nebraska_Season, <span class="fu">aes</span>(<span class="at">x =</span> Season)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Overall Win %</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Overall_WinPct, <span class="at">group =</span> <span class="dv">1</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"lightblue"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Overall_WinPct), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Conference Win %</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Conf_WinPct, <span class="at">group =</span> <span class="dv">1</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Conf_WinPct), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How Nebraska’s Win Rates Have Evolved Over the Past Decade"</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Win percentage trends across conference and overall competition"</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"By: Alex Zetterman | Source: Sports-Reference"</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Win Percentage"</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 16
-Columns: 19
-$ Rk              &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
-$ Season          &lt;chr&gt; "2025-26", "2024-25", "2023-24", "2022-23", "2021-22",…
-$ Conference      &lt;chr&gt; "Big Ten", "Big Ten", "Big Ten", "Big Ten", "Big Ten",…
-$ Overall_W       &lt;dbl&gt; 8, 21, 23, 16, 10, 7, 7, 19, 22, 12, 16, 13, 19, 15, 1…
-$ Overall_L       &lt;dbl&gt; 0, 14, 11, 16, 22, 20, 25, 17, 11, 19, 18, 18, 13, 18,…
-$ Overall_WinPct  &lt;dbl&gt; 1.000, 0.600, 0.676, 0.500, 0.313, 0.259, 0.219, 0.528…
-$ Conf_W          &lt;dbl&gt; NA, 7, 12, 9, 4, 3, 2, 6, 13, 6, 6, 5, 11, 5, 4, 7
-$ Conf_L          &lt;dbl&gt; NA, 13, 8, 11, 16, 16, 18, 14, 5, 12, 12, 13, 7, 13, 1…
-$ Conf_WinPct     &lt;dbl&gt; NA, 0.350, 0.600, 0.450, 0.200, 0.158, 0.100, 0.300, 0…
-$ SRS             &lt;dbl&gt; 14.43, 13.86, 14.36, 7.12, 3.00, 6.08, 2.41, 14.85, 10…
-$ SOS             &lt;dbl&gt; -0.20, 10.46, 7.53, 9.02, 8.25, 12.28, 10.66, 11.31, 7…
-$ Points_For      &lt;dbl&gt; 84.8, 76.0, 77.7, 68.0, 73.3, 70.0, 69.8, 71.8, 72.3, …
-$ Points_Against  &lt;dbl&gt; 70.1, 72.6, 70.9, 69.9, 78.5, 74.2, 78.1, 67.3, 68.6, …
-$ AP_Pre          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 21, NA, NA…
-$ AP_High         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 24, NA, NA, NA, 21, NA, NA…
-$ AP_Final        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
-$ NCAA_Tournament &lt;chr&gt; NA, NA, "Lost NCAA Tournament First Round", NA, NA, NA…
-$ Seed            &lt;dbl&gt; NA, NA, 8, NA, NA, NA, NA, NA, NA, NA, NA, NA, 11, NA,…
-$ Coach           &lt;chr&gt; "Fred Hoiberg (8-0)", "Fred Hoiberg (21-14)", "Fred Ho…</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>2. Bar chart showing points per game and opponent points per game. One bar chart for overall and then another graph for conference pay. Or research other graphs that would better show this. Maybe a line graph with a point on each season and conference play in one color and overall play in another color.</p>
+<p>1. Line graph showing point differential combined with strength of schedule&nbsp;</p>
+<p>3. scatter plot that shows strength of schedule vs success.</p>
 
 
 
